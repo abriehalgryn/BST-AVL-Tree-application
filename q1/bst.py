@@ -1,3 +1,3 @@
 '''
-Main program for Q1
+Main program for Q1.
 '''
