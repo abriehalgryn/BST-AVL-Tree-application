@@ -35,7 +35,7 @@ def print_leaves():
 def print_nodes():
     pass
 
-# function to print total number of nodes 
+# function to print total number of nodes
 def print_total_nodes():
     pass
 
@@ -89,6 +89,7 @@ while True:
 
     elif main_choice == 2:
         pass
+        print("hi, this is a test to see if github works")
 
     elif main_choice == 3:
         pass
