@@ -90,6 +90,7 @@ while True:
     elif main_choice == 2:
         pass
         print("hi, this is a test to see if github works")
+        print("This is test 2 with a new branch!!")
 
     elif main_choice == 3:
         pass
