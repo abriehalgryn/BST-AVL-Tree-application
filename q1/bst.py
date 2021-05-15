@@ -69,7 +69,7 @@ if build_choice == 1:
 else:
     nums = list(map(int, input("\nEnter the numbers separated by a space (e.g. 1 2 3) >> ").strip().split()))
 
-print("\nBST Values are", nums)
+print("BST Values are", nums)
 
 while True:
     main_choice = menu()
