@@ -1,9 +1,15 @@
 import os
+class TreeNode:
+    def __init__(self, e):
+        self.element = e
+        self.left = None # Point to the left node, default None
+        self.right = None # Point to the right node, default None
 
 class BinaryTree:
     def __init__(self):
         self.root = None
         self.size = 0
+
 
     def insert(self, e):
         if self.root == None:
@@ -36,6 +42,46 @@ class BinaryTree:
 
 
 
+    def delete_bst_item(self, key):
+        self.delete_item(key, self.root)
+
+
+    def delete_item(self, e, current):
+        if current is None:
+            print("Value", str(e), "not found")
+            input("Press Enter to continue")
+            os.system('cls')
+            return None
+
+        else:
+
+            if e < current.element:
+                current.left = self.delete_item(e, current.left)
+            elif e > current.element:
+                current.right = self.delete_item(e, current.right)
+            else: # element matches current.element
+
+                if current.right is None:
+                    return current.left
+
+                temp = self.minValueNode(current.right)
+                current.element = temp.element
+                current.right = self.delete_item(temp.element, current.right)
+
+            return current
+
+
+    def minValueNode(self, node):
+        current = node
+
+        # loop down to find the leftmost leaf
+        while current.left is not None:
+            current = current.left
+
+        return current
+
+
+
     # Inorder traversal from the root
     def inorder(self):
       self.inorderHelper(self.root)
@@ -50,7 +96,6 @@ class BinaryTree:
 
 
     def leaf_nodes(self):
-        print("")
         is_leaf, non_leaf = self.leaf_node_helper(self.root, non_leaf = [], is_leaf = [])
 
         return is_leaf, non_leaf
@@ -82,20 +127,19 @@ class BinaryTree:
         print(root.element, end = " ")
 
 
+    def max_subtree_depth(self, root):
+        if root is None:
+            return 0
+        leftDepth = self.max_subtree_depth(root.left)
+        rightDepth = self.max_subtree_depth(root.right)
+
+        # Choose the larger one and add the root to it.
+        if leftDepth > rightDepth:
+            return leftDepth + 1
+        else:
+            return rightDepth + 1
 
     def subtree_depth(self, e):
-        def max_subtree_depth(root):
-            if root is None:
-                return 0
-            leftDepth = max_subtree_depth(root.left)
-            rightDepth = max_subtree_depth(root.right)
-
-            # Choose the larger one and add the root to it.
-            if leftDepth > rightDepth:
-                return leftDepth + 1
-            else:
-                return rightDepth + 1
-
         current = self.root # Start from the root
         while current != None:
             if e < current.element:
@@ -103,9 +147,8 @@ class BinaryTree:
             elif e > current.element:
                 current = current.right
             else: # element matches current.element
-                print("\nDepth of subtree:", e)
-                print("Elements: "), self.postorderHelper(current)
-                print("\nThe max depth is: ", max_subtree_depth(current))
+                print("\nDepth of subtree", str(e) + " is:\n"+ str(self.max_subtree_depth(current)))
+                print("\nElements: "), self.postorderHelper(current)
                 return None
                 #return current # Found at current
         print("Node Not Found")
@@ -145,10 +188,10 @@ class BinaryTree:
             elif e > current.element:
                 current = current.right
             else: # element matches current.element
-                print("Preorder of subtree:", e)
+                print("Preorder of subtree", str(e) + ":")
                 self.preorderHelper(current)
-                print ("\nNumber of Nodes for subtree:", e , "\n" + str(countNodes(current)))
-                input("Press Enter to continue")
+                print ("\n\nNumber of Nodes for subtree", str(e) + ":\n" + str(countNodes(current)))
+                input("\nPress Enter to continue")
                 os.system('cls')
                 return None
                 #return current # Found at current
@@ -170,42 +213,39 @@ class BinaryTree:
     def getRoot(self):
       return self.root
 
-class TreeNode:
-    def __init__(self, e):
-        self.element = e
-        self.left = None # Point to the left node, default None
-        self.right = None # Point to the right node, default None
 
-
-
-# function to delete an integer key from the BST
-def delete_int_key(nums, int_to_delete):
-    nums.remove(int_to_delete)
-    return nums
 
 def main(size = 7):
     nums = [] # variable delcaration for the BST
 
-    print("\nWelcome to the BST Traversal Program!")
+    print("Welcome to the BST Traversal Program!")
 
     print("\nBuild Menu:")
     print(" 1. Pre-load a sequence of integers to build a BST.")
     print(" 2. Manually enter integer values, one by one, build a BST.")
-    build_choice = int(input("\nEnter choice (1 or 2) >> "))
+
+    while True:
+        try:
+            build_choice = int(input("\nEnter choice (1 or 2) >> "))
+            if build_choice in [1, 2]:
+                break
+            else:
+                print("Invalid menu choice, please enter number 1 or number 2 ")
+            #break out of loop when correct input is inserted
+        except:
+            print("Invalid menu choice, please enter number 1 or number 2 ")
+
     os.system('cls')
 
-    choices = [1, 2]
-    while build_choice not in choices:
-        build_choice = int(input("Invalid menu choice, please enter number 1 or number 2 >>"))
 
     if build_choice == 1:
         nums = [55, 81, 65, 20, 35, 79, 23, 14, 21, 103, 92, 45, 85, 51, 47, 48, 50, 46]
 
     else:
-        nums = list(map(int, input("\nEnter the numbers separated by a space (e.g. 1 2 3) >> ").strip().split()))
+        nums = list(map(int, input("Enter the numbers separated by a space (e.g. 1 2 3) >> ").strip().split()))
 
     # building tree
-    print ("\nInserting the following values:")
+    print ("Inserting the following values:")
     for i in nums:
         print(i, end=" ")
     intTree = BinaryTree()
@@ -224,17 +264,26 @@ def main(size = 7):
         print(" 5. Insert a new integer key into the BST.")
         print(" 6. Delete an integer key from the BST.")
         print(" 7. Exit.")
-        main_choice = int(input("\nEnter choice (1 - 7) >> ")) # take input
+
+
+
+        while True:
+            try:
+                main_choice = int(input("\nEnter choice (1 - 7) >> ")) # take input
+                if main_choice in [1, 2, 3, 4, 5, 6, 7]:
+                    break
+                else:
+                    print("Invalid menu choice, please choose a number between 1 and 7")
+                #break out of loop when correct input is inserted
+            except:
+                print("Invalid menu choice, please choose a number between 1 and 7")
+
         os.system('cls')
 
-        # input validation
-        choices = [1, 2, 3, 4, 5, 6, 7]
-        while main_choice not in choices:
-            main_choice = int(input("Invalid menu choice, please choose a number between 1 and 7, inclusive >> "))
 
         # menu functionalities
         if main_choice == 1:
-            print("\nPre-order Traversal:")
+            print("Pre-order Traversal:")
             intTree.preorder()
 
             print("\nIn-order Traversal:")
@@ -248,35 +297,56 @@ def main(size = 7):
 
         elif main_choice == 2:
             is_leaf, non_leaf = intTree.leaf_nodes()
-            print("\nLeaf Nodes:\n" + str(is_leaf))
-            print("\nNon-leaf Nodes:\n" + str(non_leaf))
+            print("\nLeaf Nodes:\n" + " ".join(map(str, is_leaf)))
+            print("\nNon-leaf Nodes:\n" + " ".join(map(str, non_leaf)))
 
         elif main_choice == 3:
-            print("\nPre-order Traversal:")
+            print("Pre-order Traversal:")
             intTree.preorder()
             print("")
-            calculate_node = int(input("\nEnter a node to view the subtree >> "))
+            while True:
+                try:
+                    calculate_node = int(input("\nEnter a node to view the subtree >> "))
+                    break
+                except:
+                    print("Invalid menu choice, please enter a integer")
+
+            print("")
             intTree.subtree_nodes(calculate_node)
 
         elif main_choice == 4:
-            print("\nPre-order Traversal:")
+            print("Pre-order Traversal:")
             intTree.postorder()
             print("")
-            calculate_node = int(input("Enter a node to view the subtree's depth >> "))
+            while True:
+                try:
+                    calculate_node = int(input("\nEnter a node to view the subtree's depth >> "))
+                    break
+                except:
+                    print("Invalid menu choice, please enter a integer")
+
             intTree.subtree_depth(calculate_node)
+            print("")
 
 
         elif main_choice == 5:
-            int_to_add = int(input("Enter a new integer into the BST >> "))
-            nums = nums.append(int_to_add)
+            while True:
+                try:
+                    int_to_add = int(input("Enter a new integer into the BST >> "))
+                    break
+                except:
+                    print("Invalid menu choice, please enter a integer")
             intTree.insert(int_to_add)
 
         elif main_choice == 6:
-            int_to_delete = int(input("Delete a integer from the BST >> "))
-            nums = insert_int_key(nums, int_to_delete)
+            while True:
+                try:
+                    int_to_delete = int(input("Delete a integer from the BST >> "))
+                    break
+                except:
+                    print("Invalid menu choice, please enter a integer")
 
-            # add a "intTree.remove function into BinaryTree class to make this work"
-ss
+            intTree.delete_bst_item(int_to_delete)
 
 
         elif main_choice == 7:
