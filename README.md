@@ -1,3 +1,3 @@
 # Data Structures
 
-Data Structures Start
+Data Structures Start FREAKING NOOBS
