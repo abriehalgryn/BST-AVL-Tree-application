@@ -26,7 +26,8 @@ class BinaryTree:
               parent = current
               current = current.right
             else:
-              return False # Duplicate node not inserted
+                print("ERROR: node <" + str(e) + "> already exists in the BST!")
+                return False # Duplicate node not inserted
 
           # Create the new node and attach it to the parent node
           if e < parent.element:
@@ -48,7 +49,7 @@ class BinaryTree:
 
     def delete_item(self, e, current):
         if current is None:
-            print("Value", str(e), "not found")
+            print("ERROR: Node <" + str(e) + "> not found!")
             input("Press Enter to continue")
             os.system('cls')
             return None
@@ -151,7 +152,7 @@ class BinaryTree:
                 print("\nElements: "), self.postorderHelper(current)
                 return None
                 #return current # Found at current
-        print("Node Not Found")
+        print("ERROR: Node <" + str(e) + "> not found!")
         input("Press Enter to continue")
         os.system('cls')
 
@@ -195,7 +196,7 @@ class BinaryTree:
                 os.system('cls')
                 return None
                 #return current # Found at current
-        print("Node Not Found")
+        print("ERROR: Node <" + str(e) + "> not found!")
         input("Press Enter to continue")
         os.system('cls')
 
