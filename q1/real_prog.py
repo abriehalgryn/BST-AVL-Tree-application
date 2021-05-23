@@ -249,6 +249,7 @@ def main(size = 7):
     print ("Inserting the following values:")
     for i in nums:
         print(i, end=" ")
+    print("")
     intTree = BinaryTree()
     for e in nums:
       intTree.insert(e)
