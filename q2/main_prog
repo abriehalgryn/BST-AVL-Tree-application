@@ -20,8 +20,6 @@ class Node():
         self.right = None
 
 
-
-
 class AVLTree():
     def __init__(self, *args):
         self.node = None
@@ -141,6 +139,43 @@ class AVLTree():
             self.balance = 0
 
 
+
+    def delete(self, key):
+            # debug("Trying to delete at node: " + str(self.node.key))
+            if self.node != None:
+                if self.node.key == key:
+                    debug("Deleting ... " + str(key))
+                    if self.node.left.node == None and self.node.right.node == None:
+                        self.node = None # leaves can be killed at will
+                    # if only one subtree, take that
+                    elif self.node.left.node == None:
+                        self.node = self.node.right.node
+                    elif self.node.right.node == None:
+                        self.node = self.node.left.node
+
+                    # worst-case: both children present. Find logical successor
+                    else:
+                        replacement = self.logical_successor(self.node)
+                        if replacement != None: # sanity check
+                            debug("Found replacement for " + str(key) + " -> " + str(replacement.key))
+                            self.node.key = replacement.key
+
+                            # replaced. Now delete the key from right child
+                            self.node.right.delete(replacement.key)
+
+                    self.rebalance()
+                    return
+                elif key < self.node.key:
+                    self.node.left.delete(key)
+                elif key > self.node.key:
+                    self.node.right.delete(key)
+
+                self.rebalance()
+            else:
+                print("ERROR: Node <" + str(key) + "> not found!")
+
+
+
     def logical_predecessor(self, node):
         '''
         Find the biggest valued node in LEFT child
@@ -208,6 +243,22 @@ class AVLTree():
             if self.node.left != None:
                 self.node.right.display(level + 1, '>')
 
+    def leaf_nodes(self):
+        is_leaf, non_leaf = self.leaf_node_helper(self.root, non_leaf = [], is_leaf = [])
+
+        return is_leaf, non_leaf
+
+    def leaf_node_helper(self, r, non_leaf = [], is_leaf = []):
+      if r != None:
+        self.leaf_node_helper(r.left, non_leaf, is_leaf)
+        if not r.left and not r.right:
+            is_leaf.append(r.element)
+        if r.left or r.right:
+            non_leaf.append(r.element)
+        self.leaf_node_helper(r.right, non_leaf, is_leaf)
+
+      return is_leaf, non_leaf
+
 
 
 # Usage example
@@ -259,7 +310,7 @@ if __name__ == "__main__":
         print(" 1. Insert a new integer key into the AVL tree.")
         print(" 2. Delete an integer key from the AVL tree.")
         print(" 3. Print the in-order traversal sequence of the AVL tree.")
-        print(" 4. Print all leaf nodes of the AVL tree, and all non-leaf nodes (separately).")
+        print(" 4. Print all leaf nodes of the AVL tree, and all non-leaf nodes (separately).")#do this
         print(" 5. Display the AVL tree, showing the height and balance factor for each node.")
         print(" 6. Exit.")
 
@@ -278,7 +329,7 @@ if __name__ == "__main__":
         os.system('cls')
 
 
-        if main_choice == 1: ##insert key
+        if main_choice == 1:
             while True:
                 try:
                     int_to_add = int(input("Enter a new integer into the BST >> "))
@@ -295,7 +346,8 @@ if __name__ == "__main__":
                 except:
                     print("Invalid menu choice, please enter a integer")
 
-            
+            intTree.delete(int_to_delete)
+
 
 
         elif main_choice == 3:
@@ -304,7 +356,9 @@ if __name__ == "__main__":
             os.system('cls')
 
         elif main_choice == 4: #priNt leaf nodes
-            pass
+            is_leaf, non_leaf = intTree.leaf_nodes()
+            print("\nLeaf Nodes:\n" + " ".join(map(str, is_leaf)))
+            print("\nNon-leaf Nodes:\n" + " ".join(map(str, non_leaf)))
 
 
         elif main_choice == 5:
