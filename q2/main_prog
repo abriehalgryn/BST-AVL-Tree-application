@@ -210,7 +210,6 @@ class AVLTree():
 
 
 
-
 # Usage example
 if __name__ == "__main__":
     nums = [] # variable delcaration for the BST
@@ -280,10 +279,23 @@ if __name__ == "__main__":
 
 
         if main_choice == 1: ##insert key
-            pass
+            while True:
+                try:
+                    int_to_add = int(input("Enter a new integer into the BST >> "))
+                    break
+                except:
+                    print("Invalid menu choice, please enter a integer")
+            intTree.insert(int_to_add)
 
         elif main_choice == 2: #delete key
-            pass
+            while True:
+                try:
+                    int_to_delete = int(input("Delete a integer from the BST >> "))
+                    break
+                except:
+                    print("Invalid menu choice, please enter a integer")
+
+            
 
 
         elif main_choice == 3:
