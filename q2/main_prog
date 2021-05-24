@@ -243,13 +243,13 @@ if __name__ == "__main__":
     # building tree
     print ("Inserting the following values:")
     for i in nums:
-        print(i + " ")
+        print(i, end=" ")
     print("")
     intTree = AVLTree()
     for e in nums:
-      intTree.insert(e)
+      intTree.insert(e)mwmwaaassas
 
-     print ("Inorder traversal:", a.inorder_traverse()
+     print ("Inorder traversal:", a.inorder_traverse())
      intTree.display()
 
     print("")
