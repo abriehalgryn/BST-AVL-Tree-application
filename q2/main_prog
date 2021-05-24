@@ -243,21 +243,29 @@ class AVLTree():
             if self.node.left != None:
                 self.node.right.display(level + 1, '>')
 
+
     def leaf_nodes(self):
-        is_leaf, non_leaf = self.leaf_node_helper(self.root, non_leaf = [], is_leaf = [])
+        is_leaf, non_leaf = self.leaf_node_helper()
 
         return is_leaf, non_leaf
 
-    def leaf_node_helper(self, r, non_leaf = [], is_leaf = []):
-      if r != None:
-        self.leaf_node_helper(r.left, non_leaf, is_leaf)
-        if not r.left and not r.right:
-            is_leaf.append(r.element)
-        if r.left or r.right:
-            non_leaf.append(r.element)
-        self.leaf_node_helper(r.right, non_leaf, is_leaf)
+    def leaf_node_helper(self, non_leaf = [], is_leaf = []):
+        if self.node == None:
+            return non_leaf, is_leaf
 
-      return is_leaf, non_leaf
+        if self.node.left:
+            self.node.left.leaf_node_helper(non_leaf, is_leaf)
+
+        if (not self.node.left.node) and (not self.node.right.node):
+            is_leaf.append(self.node.key)
+        else:
+            non_leaf.append(self.node.key)
+
+        if self.node.right:
+            self.node.right.leaf_node_helper(non_leaf, is_leaf)
+
+        return is_leaf, non_leaf
+
 
 
 
