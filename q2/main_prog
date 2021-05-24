@@ -247,10 +247,10 @@ if __name__ == "__main__":
     print("")
     intTree = AVLTree()
     for e in nums:
-      intTree.insert(e)mwmwaaassas
+      intTree.insert(e)
 
-     print ("Inorder traversal:", a.inorder_traverse())
-     intTree.display()
+
+
 
     print("")
 
@@ -265,7 +265,6 @@ if __name__ == "__main__":
         print(" 6. Exit.")
 
 
-
         while True:
             try:
                 main_choice = int(input("\nEnter choice (1 - 7) >> ")) # take input
@@ -278,6 +277,30 @@ if __name__ == "__main__":
                 print("Invalid menu choice, please choose a number between 1 and 7")
 
         os.system('cls')
+
+
+        if main_choice == 1:
+            pass
+
+        elif main_choice == 2:
+            pass
+
+
+        elif main_choice == 3:
+            print ("Inorder traversal:", intTree.inorder_traverse())
+
+        elif main_choice == 4:
+            pass
+
+
+        elif main_choice == 5:
+            intTree.display()
+
+
+        elif main_choice == 6:
+            break
+
+    print("\nGoodbye!\n")
 
 
 
