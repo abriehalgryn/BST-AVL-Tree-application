@@ -5,7 +5,7 @@ Tests the AVL tree building algorithm
 """
 
 import os
-#import random, math
+import random
 
 outputdebug = True
 
@@ -279,34 +279,32 @@ if __name__ == "__main__":
         os.system('cls')
 
 
-        if main_choice == 1:
+        if main_choice == 1: ##insert key
             pass
 
-        elif main_choice == 2:
+        elif main_choice == 2: #delete key
             pass
 
 
         elif main_choice == 3:
             print ("Inorder traversal:", intTree.inorder_traverse())
+            input("Press enter to continue")
+            os.system('cls')
 
-        elif main_choice == 4:
+        elif main_choice == 4: #priNt leaf nodes
             pass
 
 
         elif main_choice == 5:
             intTree.display()
+            input("Press enter to continue")
+            os.system('cls')
 
 
         elif main_choice == 6:
             break
 
     print("\nGoodbye!\n")
-
-
-
-
-import random
-
 
 #def main(size = 20, sort = heapSort):
 #   lyst = []
