@@ -141,7 +141,6 @@ class AVLTree():
 
 
     def delete(self, key):
-            # debug("Trying to delete at node: " + str(self.node.key))
             if self.node != None:
                 if self.node.key == key:
                     debug("Deleting ... " + str(key))
