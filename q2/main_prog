@@ -90,7 +90,7 @@ class AVLTree():
 
 
     def rrotate(self):
-        # Rotate left pivoting on self
+        # Rotate right pivoting on self
         debug ('Rotating ' + str(self.node.key) + ' right')
         A = self.node
         B = self.node.left.node
