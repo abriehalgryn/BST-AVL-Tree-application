@@ -250,18 +250,18 @@ class AVLTree():
         return is_leaf, non_leaf
 
     def leaf_node_helper(self, non_leaf = [], is_leaf = []):
-        if self.node == None:
+        if self.node == None: #if there is no node there will be no leaves and no non leaves
             return non_leaf, is_leaf
 
-        if self.node.left:
+        if self.node.left: #if there is a left subtree it goes recursive on that node
             self.node.left.leaf_node_helper(non_leaf, is_leaf)
 
-        if (not self.node.left.node) and (not self.node.right.node):
+        if (not self.node.left.node) and (not self.node.right.node): #if there is no subtrees the node is a leaf
             is_leaf.append(self.node.key)
         else:
             non_leaf.append(self.node.key)
 
-        if self.node.right:
+        if self.node.right:#if there is a right subtree it goes recursive on that node
             self.node.right.leaf_node_helper(non_leaf, is_leaf)
 
         return is_leaf, non_leaf
@@ -379,14 +379,3 @@ if __name__ == "__main__":
             break
 
     print("\nGoodbye!\n")
-
-#def main(size = 20, sort = heapSort):
-#   lyst = []
-#    for count in range(size):
-#        lyst.append(random.randint(1, size*5 + 1))
-#    print(lyst)
-#    sort(lyst)
-#    print(lyst)
-
-#if __name__ == "__main__":
-#    main()
