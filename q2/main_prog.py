@@ -19,7 +19,6 @@ class Node():
         self.left = None
         self.right = None
 
-
 class AVLTree():
     def __init__(self, *args):
         self.node = None
@@ -87,8 +86,6 @@ class AVLTree():
                 self.update_heights()
                 self.update_balances()
 
-
-
     def rrotate(self):
         # Rotate right pivoting on self
         debug ('Rotating ' + str(self.node.key) + ' right')
@@ -100,7 +97,6 @@ class AVLTree():
         B.right.node = A
         A.left.node = T
 
-
     def lrotate(self):
         # Rotate left pivoting on self
         debug ('Rotating ' + str(self.node.key) + ' left')
@@ -111,7 +107,6 @@ class AVLTree():
         self.node = B
         B.left.node = A
         A.right.node = T
-
 
     def update_heights(self, recurse=True):
         if not self.node == None:
@@ -138,8 +133,6 @@ class AVLTree():
         else:
             self.balance = 0
 
-
-
     def delete_node(self, key):
             if self.node != None:
                 if self.node.key == key:
@@ -165,8 +158,6 @@ class AVLTree():
                 self.rebalance()
             else:
                 print("ERROR: Node <" + str(key) + "> not found!")
-
-
 
     def logical_predecessor(self, node):
         '''
@@ -235,7 +226,6 @@ class AVLTree():
             if self.node.left != None:
                 self.node.right.display(level + 1, '>')
 
-
     def leaf_nodes(self):
         is_leaf, non_leaf = self.leaf_node_helper()
 
@@ -257,9 +247,6 @@ class AVLTree():
             self.node.right.leaf_node_helper(non_leaf, is_leaf)
 
         return is_leaf, non_leaf
-
-
-
 
 # Usage example
 if __name__ == "__main__":
@@ -283,10 +270,8 @@ if __name__ == "__main__":
 
     os.system('cls')
 
-
     if build_choice == 1:
         nums = [55, 81, 65, 20, 35, 79, 23, 14, 21, 103, 92, 45, 85, 51, 47, 48, 50, 46]
-
     else:
         nums = list(map(int, input("Enter the numbers separated by a space (e.g. 1 2 3) >> ").strip().split()))
 
@@ -297,10 +282,7 @@ if __name__ == "__main__":
     print("")
     intTree = AVLTree()
     for e in nums:
-      intTree.insert(e)
-
-
-
+        intTree.insert(e)
 
     print("")
 
@@ -314,11 +296,10 @@ if __name__ == "__main__":
         print(" 5. Display the AVL tree, showing the height and balance factor for each node.")
         print(" 6. Exit.")
 
-
         while True:
             try: #error checking for int input to make sure the program doesnt crash
-                main_choice = int(input("\nEnter choice (1 - 7) >> ")) # take input
-                if main_choice in [1, 2, 3, 4, 5, 6, 7]:
+                main_choice = int(input("\nEnter choice (1 - 6) >> ")) # take input
+                if main_choice in [1, 2, 3, 4, 5, 6]:
                     break
                 else:
                     print("Invalid menu choice, please choose a number between 1 and 7")
@@ -327,7 +308,6 @@ if __name__ == "__main__":
                 print("Invalid menu choice, please choose a number between 1 and 7")
 
         os.system('cls')
-
 
         if main_choice == 1:
             while True: #error checking for int input to make sure the program doesnt crash
@@ -348,8 +328,6 @@ if __name__ == "__main__":
 
             intTree.delete_node(int_to_delete)#calls delete methods on the tree to display
 
-
-
         elif main_choice == 3:
             print ("Inorder traversal:", intTree.inorder_traverse())#calls inorder traverse methods on the tree to display
             input("Press enter to continue")
@@ -360,12 +338,10 @@ if __name__ == "__main__":
             print("\nLeaf Nodes:\n" + " ".join(map(str, is_leaf)))
             print("\nNon-leaf Nodes:\n" + " ".join(map(str, non_leaf)))
 
-
         elif main_choice == 5:
             intTree.display()#calls display methods on the tree to display
             input("Press enter to continue")
             os.system('cls')
-
 
         elif main_choice == 6:
             break
