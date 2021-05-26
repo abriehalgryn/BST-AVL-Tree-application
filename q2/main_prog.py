@@ -316,7 +316,7 @@ if __name__ == "__main__":
 
 
         while True:
-            try::#error checking for int input to make sure the program doesnt crash
+            try: #error checking for int input to make sure the program doesnt crash
                 main_choice = int(input("\nEnter choice (1 - 7) >> ")) # take input
                 if main_choice in [1, 2, 3, 4, 5, 6, 7]:
                     break
@@ -330,7 +330,7 @@ if __name__ == "__main__":
 
 
         if main_choice == 1:
-            while True::#error checking for int input to make sure the program doesnt crash
+            while True: #error checking for int input to make sure the program doesnt crash
                 try:
                     int_to_add = int(input("Enter a new integer into the BST >> "))
                     break
@@ -339,7 +339,7 @@ if __name__ == "__main__":
             intTree.insert(int_to_add)#calls insert methods on the tree to display
 
         elif main_choice == 2: #delete key
-            while True::#error checking for int input to make sure the program doesnt crash
+            while True: #error checking for int input to make sure the program doesnt crash
                 try:
                     int_to_delete = int(input("Delete a integer from the BST >> "))
                     break
