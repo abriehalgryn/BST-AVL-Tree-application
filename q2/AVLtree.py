@@ -1,5 +1,5 @@
 """
-File: testAVLtree.py
+File: AVLtree.py
 
 Tests the AVL tree building algorithm
 """
