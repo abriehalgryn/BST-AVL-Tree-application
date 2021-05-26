@@ -310,7 +310,7 @@ if __name__ == "__main__":
         os.system('cls')
 
         if main_choice == 1:
-            while True: #error checking for int input to make sure the program doesnt crash
+            while True:#error checking for int input to make sure the program doesnt crash
                 try:
                     int_to_add = int(input("Enter a new integer into the BST >> "))
                     break
@@ -319,7 +319,7 @@ if __name__ == "__main__":
             intTree.insert(int_to_add)#calls insert methods on the tree to display
 
         elif main_choice == 2: #delete key
-            while True: #error checking for int input to make sure the program doesnt crash
+            while True:#error checking for int input to make sure the program doesnt crash
                 try:
                     int_to_delete = int(input("Delete a integer from the BST >> "))
                     break
