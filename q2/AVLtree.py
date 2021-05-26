@@ -1,7 +1,7 @@
 """
 File: AVLtree.py
 
-Tests the AVL tree building algorithm
+Tests the AVL tree building algorithm and deletion function.
 """
 
 import os

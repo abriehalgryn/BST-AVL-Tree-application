@@ -1,3 +1,9 @@
+"""
+File: bst.py
+
+BST application system allows user to build BST and then perform operations on the BST.
+"""
+
 import os
 class TreeNode:
     def __init__(self, e):
@@ -9,7 +15,6 @@ class BinaryTree:
     def __init__(self):
         self.root = None
         self.size = 0
-
 
     def insert(self, e):
         if self.root == None:
@@ -41,11 +46,8 @@ class BinaryTree:
     def createNewNode(self, e):
       return TreeNode(e)
 
-
-
     def delete_bst_item(self, key):
         self.delete_item(key, self.root)
-
 
     def delete_item(self, e, current):
         if current is None: #if the tree node is empty
@@ -71,7 +73,6 @@ class BinaryTree:
 
             return current
 
-
     def minValueNode(self, node):
         current = node
 
@@ -80,8 +81,6 @@ class BinaryTree:
             current = current.left
 
         return current
-
-
 
     # Inorder traversal from the root
     def inorder(self):
@@ -93,8 +92,6 @@ class BinaryTree:
         self.inorderHelper(r.left)
         print(r.element, end = " ")
         self.inorderHelper(r.right)
-
-
 
     def leaf_nodes(self):
         is_leaf, non_leaf = self.leaf_node_helper(self.root, non_leaf = [], is_leaf = [])
@@ -112,10 +109,6 @@ class BinaryTree:
 
       return is_leaf, non_leaf #tuple to return 2 lists
 
-
-
-
-
     # Postorder traversal from the root
     def postorder(self):
       self.postorderHelper(self.root)
@@ -126,7 +119,6 @@ class BinaryTree:
         self.postorderHelper(root.left)
         self.postorderHelper(root.right)
         print(root.element, end = " ")
-
 
     def max_subtree_depth(self, root):
         if root is None:
@@ -155,7 +147,6 @@ class BinaryTree:
         print("ERROR: Node <" + str(e) + "> not found!")
         input("Press Enter to continue")
         os.system('cls')
-
 
     # for a given node N in a BST, it calculates the total number of nodes of the sub-tree rooted at N, and prints all nodes, including N, of the sub-tree.
     # Preorder traversal from the root
@@ -200,7 +191,6 @@ class BinaryTree:
         input("Press Enter to continue")
         os.system('cls')
 
-
     # Return true if the tree is empty
     def isEmpty(self):
       return self.size == 0
@@ -213,8 +203,6 @@ class BinaryTree:
     # Return the root of the tree
     def getRoot(self):
       return self.root
-
-
 
 def main(size = 7):
     nums = [] # variable delcaration for the BST
@@ -238,10 +226,8 @@ def main(size = 7):
 
     os.system('cls') # clear the screen to reduce junk
 
-
     if build_choice == 1:
         nums = [55, 81, 65, 20, 35, 79, 23, 14, 21, 103, 92, 45, 85, 51, 47, 48, 50, 46]
-
     else:
         nums = list(map(int, input("Enter the numbers separated by a space (e.g. 1 2 3) >> ").strip().split())) #split input by space and put into list
 
@@ -267,8 +253,6 @@ def main(size = 7):
         print(" 6. Delete an integer key from the BST.")
         print(" 7. Exit.")
 
-
-
         while True:
             try:
                 main_choice = int(input("\nEnter choice (1 - 7) >> ")) # take input
@@ -281,7 +265,6 @@ def main(size = 7):
                 print("Invalid menu choice, please choose a number between 1 and 7")
 
         os.system('cls')
-
 
         # menu functionalities
         if main_choice == 1: #calls in, pre and post order traversal methods on the tree to display
@@ -330,7 +313,6 @@ def main(size = 7):
             intTree.subtree_depth(calculate_node)#calls subtree_depth methods on the tree to display
             print("")
 
-
         elif main_choice == 5:
             while True:
                 try:#error checking for int input to make sure the program doesnt crash
@@ -349,7 +331,6 @@ def main(size = 7):
                     print("Invalid menu choice, please enter a integer")
 
             intTree.delete_bst_item(int_to_delete)#calls delete_bst_item methods on the tree to display
-
 
         elif main_choice == 7:
             break
