@@ -140,34 +140,27 @@ class AVLTree():
 
 
 
-    def delete(self, key):
+    def delete_node(self, key):
             if self.node != None:
                 if self.node.key == key:
-                    debug("Deleting ... " + str(key))
-                    if self.node.left.node == None and self.node.right.node == None:
-                        self.node = None # leaves can be killed at will
-                    # if only one subtree, take that
-                    elif self.node.left.node == None:
+                    if self.node.left.node == None and self.node.right.node == None: # no children these can be deleted at will
+                        self.node = None
+                    elif self.node.left.node == None:# if there is only one subtree it will use this
                         self.node = self.node.right.node
                     elif self.node.right.node == None:
                         self.node = self.node.left.node
-
-                    # worst-case: both children present. Find logical successor
-                    else:
-                        replacement = self.logical_successor(self.node)
-                        if replacement != None: # sanity check
-                            debug("Found replacement for " + str(key) + " -> " + str(replacement.key))
-                            self.node.key = replacement.key
-
-                            # replaced. Now delete the key from right child
-                            self.node.right.delete(replacement.key)
-
+                    else:# if both children are present it will find the logical_successor
+                        change = self.logical_successor(self.node)
+                        if change != None:
+                            debug("Replacing " + str(key) + " with: " + str(change.key))
+                            self.node.key = change.key #replace key
+                            self.node.right.delete(change.key) # delete key from right child
                     self.rebalance()
                     return
                 elif key < self.node.key:
-                    self.node.left.delete(key)
+                    self.node.left.delete_node(key)
                 elif key > self.node.key:
-                    self.node.right.delete(key)
+                    self.node.right.delete_node(key)
 
                 self.rebalance()
             else:
@@ -353,7 +346,7 @@ if __name__ == "__main__":
                 except:
                     print("Invalid menu choice, please enter a integer")
 
-            intTree.delete(int_to_delete)
+            intTree.delete_node(int_to_delete)
 
 
 
