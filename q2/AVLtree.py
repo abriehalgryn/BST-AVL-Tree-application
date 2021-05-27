@@ -302,10 +302,10 @@ if __name__ == "__main__":
                 if main_choice in [1, 2, 3, 4, 5, 6]:
                     break
                 else:
-                    print("Invalid menu choice, please choose a number between 1 and 7")
+                    print("Invalid menu choice, please choose a number between 1 and 6")
                 # break out of loop when correct input is inserted
             except:
-                print("Invalid menu choice, please choose a number between 1 and 7")
+                print("Invalid menu choice, please choose a number between 1 and 6")
 
         os.system('cls')
 
