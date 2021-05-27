@@ -321,7 +321,7 @@ if __name__ == "__main__":
         elif main_choice == 2: # delete key
             while True: # error checking for int input to make sure the program doesnt crash
                 try:
-                    int_to_delete = int(input("Delete a integer from the BST >> "))
+                    int_to_delete = int(input("Enter key of node to delete >> "))
                     break
                 except:
                     print("Invalid menu choice, please enter a integer")
