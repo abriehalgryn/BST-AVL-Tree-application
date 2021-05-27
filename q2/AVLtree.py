@@ -7,7 +7,7 @@ Tests the AVL tree building algorithm and deletion function.
 import os
 import random
 
-outputdebug = True
+outputdebug = True # prints messages to update user on what happened during execution
 
 def debug(msg):
     if outputdebug:
@@ -138,15 +138,15 @@ class AVLTree():
                 if self.node.key == key:
                     if self.node.left.node == None and self.node.right.node == None: # no children these can be deleted at will
                         self.node = None
-                    elif self.node.left.node == None:# if there is only one subtree it will use this
+                    elif self.node.left.node == None: # if there is only one subtree it will use this
                         self.node = self.node.right.node
                     elif self.node.right.node == None:
                         self.node = self.node.left.node
-                    else:# if both children are present it will find the logical_successor
+                    else: # if both children are present it will find the logical_successor
                         change = self.logical_successor(self.node)
                         if change != None:
                             debug("Replacing " + str(key) + " with: " + str(change.key))
-                            self.node.key = change.key #replace key
+                            self.node.key = change.key # replace key
                             self.node.right.delete(change.key) # delete key from right child
                     self.rebalance()
                     return
@@ -232,18 +232,18 @@ class AVLTree():
         return is_leaf, non_leaf
 
     def leaf_node_helper(self, non_leaf = [], is_leaf = []):
-        if self.node == None: #if there is no node there will be no leaves and no non leaves
+        if self.node == None: # if there is no node there will be no leaves and no non leaves
             return non_leaf, is_leaf
 
-        if self.node.left: #if there is a left subtree it goes recursive on that node
+        if self.node.left: # if there is a left subtree it goes recursive on that node
             self.node.left.leaf_node_helper(non_leaf, is_leaf)
 
-        if (not self.node.left.node) and (not self.node.right.node): #if there is no subtrees the node is a leaf
+        if (not self.node.left.node) and (not self.node.right.node): # if there is no subtrees the node is a leaf
             is_leaf.append(self.node.key)
         else:
             non_leaf.append(self.node.key)
 
-        if self.node.right:#if there is a right subtree it goes recursive on that node
+        if self.node.right:# if there is a right subtree it goes recursive on that node
             self.node.right.leaf_node_helper(non_leaf, is_leaf)
 
         return is_leaf, non_leaf
@@ -264,7 +264,7 @@ if __name__ == "__main__":
                 break
             else:
                 print("Invalid menu choice, please enter number 1 or number 2 ")
-            #break out of loop when correct input is inserted
+            # break out of loop when correct input is inserted
         except:
             print("Invalid menu choice, please enter number 1 or number 2 ")
 
@@ -292,54 +292,54 @@ if __name__ == "__main__":
         print(" 1. Insert a new integer key into the AVL tree.")
         print(" 2. Delete an integer key from the AVL tree.")
         print(" 3. Print the in-order traversal sequence of the AVL tree.")
-        print(" 4. Print all leaf nodes of the AVL tree, and all non-leaf nodes (separately).")#do this
+        print(" 4. Print all leaf nodes of the AVL tree, and all non-leaf nodes (separately).") # do this
         print(" 5. Display the AVL tree, showing the height and balance factor for each node.")
         print(" 6. Exit.")
 
         while True:
-            try: #error checking for int input to make sure the program doesnt crash
+            try: # error checking for int input to make sure the program doesnt crash
                 main_choice = int(input("\nEnter choice (1 - 6) >> ")) # take input
                 if main_choice in [1, 2, 3, 4, 5, 6]:
                     break
                 else:
                     print("Invalid menu choice, please choose a number between 1 and 7")
-                #break out of loop when correct input is inserted
+                # break out of loop when correct input is inserted
             except:
                 print("Invalid menu choice, please choose a number between 1 and 7")
 
         os.system('cls')
 
         if main_choice == 1:
-            while True:#error checking for int input to make sure the program doesnt crash
+            while True: # error checking for int input to make sure the program doesnt crash
                 try:
                     int_to_add = int(input("Enter a new integer into the BST >> "))
                     break
                 except:
                     print("Invalid menu choice, please enter a integer")
-            intTree.insert(int_to_add)#calls insert methods on the tree to display
+            intTree.insert(int_to_add) # calls insert methods on the tree to display
 
-        elif main_choice == 2: #delete key
-            while True:#error checking for int input to make sure the program doesnt crash
+        elif main_choice == 2: # delete key
+            while True: # error checking for int input to make sure the program doesnt crash
                 try:
                     int_to_delete = int(input("Delete a integer from the BST >> "))
                     break
                 except:
                     print("Invalid menu choice, please enter a integer")
 
-            intTree.delete_node(int_to_delete)#calls delete methods on the tree to display
+            intTree.delete_node(int_to_delete) # calls delete methods on the tree to display
 
         elif main_choice == 3:
-            print ("Inorder traversal:", intTree.inorder_traverse())#calls inorder traverse methods on the tree to display
+            print ("Inorder traversal:", intTree.inorder_traverse()) # calls inorder traverse methods on the tree to display
             input("Press enter to continue")
             os.system('cls')
 
-        elif main_choice == 4: #priNt leaf nodes
-            is_leaf, non_leaf = intTree.leaf_nodes()#calls leaf nodes methods on the tree to display
+        elif main_choice == 4: # print leaf nodes
+            is_leaf, non_leaf = intTree.leaf_nodes() # calls leaf nodes methods on the tree to display
             print("\nLeaf Nodes:\n" + " ".join(map(str, is_leaf)))
             print("\nNon-leaf Nodes:\n" + " ".join(map(str, non_leaf)))
 
         elif main_choice == 5:
-            intTree.display()#calls display methods on the tree to display
+            intTree.display() # calls display methods on the tree to display
             input("Press enter to continue")
             os.system('cls')
 
