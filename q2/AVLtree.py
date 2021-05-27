@@ -273,7 +273,12 @@ if __name__ == "__main__":
     if build_choice == 1:
         nums = [55, 81, 65, 20, 35, 79, 23, 14, 21, 103, 92, 45, 85, 51, 47, 48, 50, 46]
     else:
-        nums = list(map(int, input("Enter the numbers separated by a space (e.g. 1 2 3) >> ").strip().split()))
+        while True:
+            try:
+                nums = list(map(int, input("Enter the numbers separated by a space (e.g. 1 2 3) >> ").strip().split()))
+                break
+            except ValueError:
+                print("\nInvalid input. Please use integers only, separated by a space. No strings.\n")
 
     # building tree
     print ("Inserting the following values:")
