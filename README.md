@@ -1,3 +1,1 @@
-# Data Structures
-
-Data Structures Start FREAKING NOOBS
+Application made during my secon year first semester at uni
